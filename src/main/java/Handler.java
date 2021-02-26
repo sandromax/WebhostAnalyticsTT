@@ -5,68 +5,38 @@ import domain.ResponseType;
 import domain.service.Service;
 import domain.WaitingTimeline;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class Handler {
 
-    private int count;
     private LinkedList<String> lines;
-    private String outputString;
-
     private InternalDatabase database;
 
-    public Handler(InternalDatabase database) {
+    public Handler(InternalDatabase database, LinkedList<String> lines) {
 
-        lines = new LinkedList<>();
-        outputString = new String();
-
+        this.lines = lines;
         this.database = database;
 
-        readInput();
     }
 
-    // TODO: add checking first digit and rows count
-    private void readInput() {
-
-        InputStream is = getClass().getClassLoader().getResourceAsStream("input.txt");
-
-        try (InputStreamReader streamReader =
-                     new InputStreamReader(is, StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(streamReader)) {
-
-            String line = reader.readLine();
-
-            count = Integer.valueOf(line);
-
-            while ((line = reader.readLine()) != null) {
-//                System.out.println(line);
-                lines.add(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
+    // TODO: add checking first digit (rows count) and row format
     public void handleLines() {
+
+        int wrongLine = 1;
         String firstLetter;
         for(String line : lines) {
             firstLetter = line.substring(0, 1);
 
             if(firstLetter.equals("C")) {
                 constructAndSaveWaitingTimeLine(line);
+                wrongLine++;
             } else if(firstLetter.equals("D")) {
                 constructAndExecuteQueryLine(line);
+                wrongLine++;
             } else {
-                // TODO: create exception
-                System.out.println("EXCEPTION!!! Wrong line!");
+                wrongLine++;
+                System.out.println("!!!Wrong params in line: " + wrongLine);
             }
 
         }
@@ -92,9 +62,6 @@ public class Handler {
         WaitingTimeline waitingTimeline = new WaitingTimeline(service, question, responseType, date, time);
 
         database.addWaitingTimeLine(waitingTimeline);
-
-        System.out.println("DB +1 and now size is: " + database.getWaitingTimelines().size());
-
     }
 
     private void constructAndExecuteQueryLine(String line) {
@@ -133,7 +100,6 @@ public class Handler {
             QueryLine queryLine = new QueryLine(service, question, responseType, date);
             queryLine.execute(database);
         }
-
     }
 
 }
