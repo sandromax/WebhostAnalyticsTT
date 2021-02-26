@@ -8,7 +8,7 @@ public enum ServiceVariation {
 
     private String variationId;
 
-    private ServiceVariation(String variationId) {
+    ServiceVariation(String variationId) {
         this.variationId = variationId;
     }
 

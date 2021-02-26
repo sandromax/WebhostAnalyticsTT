@@ -25,7 +25,7 @@ public enum QuestionCategory {
 
     private String questionCategoryId;
 
-    private QuestionCategory(String questionCategoryId) {
+    QuestionCategory(String questionCategoryId) {
         this.questionCategoryId = questionCategoryId;
     }
 

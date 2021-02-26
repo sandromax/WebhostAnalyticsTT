@@ -1,7 +1,5 @@
 package domain.question;
 
-import domain.service.ServiceVariation;
-
 public enum QuestionType {
 
     ALL("*"),
@@ -18,7 +16,7 @@ public enum QuestionType {
 
     private String questionTypeId;
 
-    private QuestionType(String questionTypeId) {
+    QuestionType(String questionTypeId) {
         this.questionTypeId = questionTypeId;
     }
 

@@ -5,12 +5,11 @@ import domain.question.Question;
 import domain.question.QuestionType;
 import domain.service.Service;
 import domain.service.ServiceType;
-import domain.service.ServiceVariation;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-public class QueryLine extends Line{
+public class QueryLine{
 
     private Service service;
     private Question question;

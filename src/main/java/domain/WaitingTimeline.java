@@ -5,7 +5,7 @@ import domain.service.Service;
 
 import java.time.LocalDate;
 
-public class WaitingTimeline extends Line{
+public class WaitingTimeline{
 
     private Service service;
     private Question question;
