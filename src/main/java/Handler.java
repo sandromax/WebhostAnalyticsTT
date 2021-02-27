@@ -10,12 +10,12 @@ import java.util.LinkedList;
 
 public class Handler {
 
-    private LinkedList<String> lines;
+    private LinkedList<String> linesFromInput;
     private LinkedList<WaitingTimeline> waitingTimelines;
 
     public Handler(InputReader reader) {
 
-        this.lines = reader.readInput();
+        this.linesFromInput = reader.readInput();
         waitingTimelines = new LinkedList<>();
 
     }
@@ -25,7 +25,7 @@ public class Handler {
 
         int wrongLine = 1;
         String firstLetter;
-        for(String line : lines) {
+        for(String line : linesFromInput) {
             firstLetter = line.substring(0, 1);
 
             if(firstLetter.equals("C")) {
