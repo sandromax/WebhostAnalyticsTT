@@ -1,4 +1,3 @@
-import db.InternalDatabase;
 import io.TXTFileReader;
 
 import java.util.LinkedList;
@@ -6,11 +5,9 @@ import java.util.LinkedList;
 public class AppRunner {
     public static void main(String[] args) {
 
-        InternalDatabase internalDatabase = new InternalDatabase();
-        TXTFileReader fileReader = new TXTFileReader();
-        LinkedList<String> lines = fileReader.readInput("input.txt");
+        TXTFileReader fileReader = new TXTFileReader("input.txt");
 
-        Handler handler = new Handler(internalDatabase, lines);
+        Handler handler = new Handler(fileReader);
         handler.handleLines();
 
     }

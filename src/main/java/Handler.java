@@ -1,9 +1,9 @@
-import db.InternalDatabase;
 import domain.QueryLine;
 import domain.question.Question;
 import domain.ResponseType;
 import domain.service.Service;
 import domain.WaitingTimeline;
+import io.InputReader;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -11,12 +11,12 @@ import java.util.LinkedList;
 public class Handler {
 
     private LinkedList<String> lines;
-    private InternalDatabase database;
+    private LinkedList<WaitingTimeline> waitingTimelines;
 
-    public Handler(InternalDatabase database, LinkedList<String> lines) {
+    public Handler(InputReader reader) {
 
-        this.lines = lines;
-        this.database = database;
+        this.lines = reader.readInput();
+        waitingTimelines = new LinkedList<>();
 
     }
 
@@ -61,7 +61,7 @@ public class Handler {
 
         WaitingTimeline waitingTimeline = new WaitingTimeline(service, question, responseType, date, time);
 
-        database.addWaitingTimeLine(waitingTimeline);
+        waitingTimelines.add(waitingTimeline);
     }
 
     private void constructAndExecuteQueryLine(String line) {
@@ -88,7 +88,7 @@ public class Handler {
             LocalDate date2 = LocalDate.of(year,month, day);
 
             QueryLine queryLine = new QueryLine(service, question, responseType, date1, date2);
-            queryLine.execute(database);
+            queryLine.execute(waitingTimelines);
 
         } else if(datesArr.length == 1) {
             String[] dateArr = datesArr[0].split("\\.");
@@ -98,7 +98,7 @@ public class Handler {
             LocalDate date = LocalDate.of(year,month, day);
 
             QueryLine queryLine = new QueryLine(service, question, responseType, date);
-            queryLine.execute(database);
+            queryLine.execute(waitingTimelines);
         }
     }
 

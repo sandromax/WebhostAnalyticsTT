@@ -4,6 +4,6 @@ import java.util.LinkedList;
 
 public interface InputReader {
 
-    LinkedList<String> readInput(String fileName);
+    LinkedList<String> readInput();
 
 }

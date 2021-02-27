@@ -1,6 +1,5 @@
 package domain;
 
-import db.InternalDatabase;
 import domain.question.Question;
 import domain.question.QuestionType;
 import domain.service.Service;
@@ -53,8 +52,7 @@ public class QueryLine{
         return endDate;
     }
 
-    public void execute(InternalDatabase database) {
-        LinkedList<WaitingTimeline> waitingTimelines = database.getWaitingTimelines();
+    public void execute(LinkedList<WaitingTimeline> waitingTimelines) {
         int minutes = 0;
         int rows = 0;
 

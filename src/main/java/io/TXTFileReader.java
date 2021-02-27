@@ -9,8 +9,14 @@ import java.util.LinkedList;
 
 public class TXTFileReader implements InputReader{
 
+    private String fileName;
+
+    public TXTFileReader(String fileName) {
+        this.fileName = fileName;
+    }
+
     @Override
-    public LinkedList<String> readInput(String fileName) {
+    public LinkedList<String> readInput() {
         LinkedList<String> lines = new LinkedList<>();
 
         InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
